@@ -1,10 +1,13 @@
 PODS:
   - MBProgressHUD (0.8)
+  - REFrostedViewController (2.4.5)
 
 DEPENDENCIES:
   - MBProgressHUD
+  - REFrostedViewController
 
 SPEC CHECKSUMS:
   MBProgressHUD: 2bbc6f470111daf7f3eaa4eb12b8cbf01c4c0622
+  REFrostedViewController: ab017bbd8d8ab3b23615ef308707711d8576999b
 
 COCOAPODS: 0.32.1
