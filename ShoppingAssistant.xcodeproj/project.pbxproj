@@ -23,6 +23,8 @@
 		EB19A40119229ADD000327F0 /* ZKNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB19A40019229ADD000327F0 /* ZKNavigationController.m */; };
 		EB19A40419229EC4000327F0 /* ZKHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB19A40319229EC4000327F0 /* ZKHomeViewController.m */; };
 		EB19A40719229F95000327F0 /* ZKMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB19A40619229F95000327F0 /* ZKMenuViewController.m */; };
+		EB91358A1924B50900950FAF /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB9135891924B50800950FAF /* CoreBluetooth.framework */; };
+		EB91358C1924B51100950FAF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB91358B1924B51100950FAF /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,8 @@
 		EB19A40319229EC4000327F0 /* ZKHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKHomeViewController.m; sourceTree = "<group>"; };
 		EB19A40519229F95000327F0 /* ZKMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKMenuViewController.h; sourceTree = "<group>"; };
 		EB19A40619229F95000327F0 /* ZKMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKMenuViewController.m; sourceTree = "<group>"; };
+		EB9135891924B50800950FAF /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		EB91358B1924B51100950FAF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +71,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB91358C1924B51100950FAF /* CoreLocation.framework in Frameworks */,
+				EB91358A1924B50900950FAF /* CoreBluetooth.framework in Frameworks */,
 				EB19A3D219228F79000327F0 /* CoreGraphics.framework in Frameworks */,
 				EB19A3D419228F79000327F0 /* UIKit.framework in Frameworks */,
 				EB19A3D019228F79000327F0 /* Foundation.framework in Frameworks */,
@@ -110,6 +116,8 @@
 		EB19A3CE19228F79000327F0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EB91358B1924B51100950FAF /* CoreLocation.framework */,
+				EB9135891924B50800950FAF /* CoreBluetooth.framework */,
 				EB19A3CF19228F79000327F0 /* Foundation.framework */,
 				EB19A3D119228F79000327F0 /* CoreGraphics.framework */,
 				EB19A3D319228F79000327F0 /* UIKit.framework */,
@@ -223,6 +231,13 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = zikong;
 				TargetAttributes = {
+					EB19A3CB19228F79000327F0 = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
 					EB19A3E619228F79000327F0 = {
 						TestTargetID = EB19A3CB19228F79000327F0;
 					};

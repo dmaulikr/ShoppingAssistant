@@ -8,6 +8,11 @@
 
 #import "ZKAppDelegate.h"
 
+@interface ZKAppDelegate () <CLLocationManagerDelegate>
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic) BOOL isInsideRegion;
+@end
+
 @implementation ZKAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -23,34 +28,99 @@
     self.window.rootViewController = frostedViewController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    [self initLocationManger];
+    
     return YES;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application
+#pragma mark - PrivateMethod
+- (void)initLocationManger
 {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    
+    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"0C8CBFDD-B4B8-1DBF-C966-200713AEBB25"];
+    CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:@"iBeacon"];
+    
+    region.notifyEntryStateOnDisplay = YES;
+    if ([CLLocationManager isMonitoringAvailableForClass:[CLBeaconRegion class]])
+    {
+        [self.locationManager startMonitoringForRegion:region];
+        [self.locationManager startRangingBeaconsInRegion:region];
+        
+        // get status update right away for UI
+        [self.locationManager requestStateForRegion:region];
+    }
+    else
+    {
+        NSLog(@"This device does not support monitoring beacon regions");
+    }
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
+
+- (void)_sendEnterLocalNotification
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    if (!_isInsideRegion)
+    {
+        UILocalNotification *notice = [[UILocalNotification alloc] init];
+        
+        notice.alertBody = @"Inside Estimote beacon region!";
+        notice.alertAction = @"Open";
+        
+        [[UIApplication sharedApplication] scheduleLocalNotification:notice];
+    }
+    
+    _isInsideRegion = YES;
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application
+- (void)_sendExitLocalNotification
 {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    if (_isInsideRegion)
+    {
+        UILocalNotification *notice = [[UILocalNotification alloc] init];
+        
+        notice.alertBody = @"Left Estimote beacon region!";
+        notice.alertAction = @"Open";
+        
+        [[UIApplication sharedApplication] scheduleLocalNotification:notice];
+    }
+    
+    _isInsideRegion = NO;
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application
+#pragma mark - CLLocationManagerDelegate
+
+- (void)locationManager:(CLLocationManager *)manager
+      didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
 {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    NSLog(@"-------------> didDetermineState");
+    
+//    [self.locationManager requestStateForRegion:region];
+    if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive)
+    {
+        // don't send any notifications
+        return;
+    }
+    if (state == CLRegionStateInside)
+    {
+        [self _sendEnterLocalNotification];
+    }
+    else
+    {
+        [self _sendExitLocalNotification];
+    }
+    
+    
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application
+- (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region
 {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    NSLog(@"-------------> didRangeBeacons");
+    if ([beacons count] > 0) {
+        CLBeacon *nearestExhibit = [beacons firstObject];
+        NSLog(@"proximity:%ld        rssi:%ld", nearestExhibit.proximity, (long)nearestExhibit.rssi);
+    }
 }
 
 @end

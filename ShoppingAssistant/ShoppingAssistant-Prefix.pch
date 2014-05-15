@@ -19,4 +19,5 @@
     #import "ZKNavigationController.h"
     #import "ZKHomeViewController.h"
     #import "ZKMenuViewController.h"
+    #import "CoreLocation/CoreLocation.h"
 #endif
