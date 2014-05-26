@@ -20,4 +20,7 @@
     #import "ZKHomeViewController.h"
     #import "ZKMenuViewController.h"
     #import "CoreLocation/CoreLocation.h"
+    #import "ZKConstValue.h"
+    #import "UIImage+Appest.h"
+    #import "NSString+md5.h"
 #endif

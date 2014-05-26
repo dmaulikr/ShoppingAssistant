@@ -7,13 +7,25 @@
 //
 
 #import "ZKAppDelegate.h"
+#import "ZKWelcomeViewController.h"
 
 @interface ZKAppDelegate () <CLLocationManagerDelegate>
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic) BOOL isInsideRegion;
+@property (nonatomic, strong) ZKWelcomeViewController *welcomeViewController;
 @end
 
 @implementation ZKAppDelegate
++ (void)SetSubViewExternNone:(UIViewController *)viewController
+{
+    if ( IOS7_OR_LATER )
+    {
+        viewController.edgesForExtendedLayout = UIRectEdgeNone;
+        viewController.extendedLayoutIncludesOpaqueBars = NO;
+        viewController.modalPresentationCapturesStatusBarAppearance = NO;
+        viewController.navigationController.navigationBar.translucent = NO;
+    }
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -29,7 +41,16 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    [self initLocationManger];
+//    [self initLocationManger];
+    
+    NSString *loginStatus = [ZKConstValue getLoginStatus];
+    if (!loginStatus || [loginStatus isEqualToString:@""]) {
+        self.welcomeViewController = [[ZKWelcomeViewController alloc]init];
+        [ZKAppDelegate SetSubViewExternNone:self.welcomeViewController];
+        [frostedViewController presentViewController:self.welcomeViewController animated:NO completion:^{
+            
+        }];
+    }
     
     return YES;
 }
