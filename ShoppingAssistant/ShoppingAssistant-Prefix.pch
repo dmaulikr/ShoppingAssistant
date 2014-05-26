@@ -23,4 +23,6 @@
     #import "ZKConstValue.h"
     #import "UIImage+Appest.h"
     #import "NSString+md5.h"
+    #import "UIImage+base64.h"
+    #import "SVProgressHUD.h"
 #endif

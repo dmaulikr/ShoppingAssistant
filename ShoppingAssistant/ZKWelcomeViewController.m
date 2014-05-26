@@ -8,6 +8,7 @@
 
 #import "ZKWelcomeViewController.h"
 #import "ZKLoginViewController.h"
+#import "ZKRegisterViewController.h"
 
 @interface ZKWelcomeViewController ()
 @property (nonatomic, strong) UIButton *loginButton;
@@ -103,7 +104,14 @@
 
 - (void)join:(id)snder
 {
-    
+    ZKRegisterViewController *registerViewController = [[ZKRegisterViewController alloc] initWithNibName:@"ZKRegisterViewController" bundle:nil];
+    __weak ZKWelcomeViewController *me = self;
+    registerViewController.block = ^(BOOL success){
+        if (success) {
+            [me dismissViewControllerAnimated:NO completion:nil];
+        }
+    };
+    [self presentViewController:registerViewController animated:YES completion:nil];
 }
 
 @end
