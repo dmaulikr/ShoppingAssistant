@@ -30,6 +30,8 @@
 		EB39A0E91932780300C9194A /* ZKLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB39A0E71932780300C9194A /* ZKLoginViewController.m */; };
 		EB39A0EA1932780300C9194A /* ZKLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB39A0E81932780300C9194A /* ZKLoginViewController.xib */; };
 		EB39A0ED1932F53000C9194A /* NSString+md5.m in Sources */ = {isa = PBXBuildFile; fileRef = EB39A0EC1932F53000C9194A /* NSString+md5.m */; };
+		EB5EC4B41933B220006B6516 /* ZKRegisttroller.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB5EC4B21933B220006B6516 /* ZKRegisttroller.xib */; };
+		EB5EC4B61933B63E006B6516 /* avator.png in Resources */ = {isa = PBXBuildFile; fileRef = EB5EC4B51933B63E006B6516 /* avator.png */; };
 		EB91358A1924B50900950FAF /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB9135891924B50800950FAF /* CoreBluetooth.framework */; };
 		EB91358C1924B51100950FAF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB91358B1924B51100950FAF /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
@@ -81,6 +83,8 @@
 		EB39A0E81932780300C9194A /* ZKLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZKLoginViewController.xib; sourceTree = "<group>"; };
 		EB39A0EB1932F53000C9194A /* NSString+md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+md5.h"; sourceTree = "<group>"; };
 		EB39A0EC1932F53000C9194A /* NSString+md5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+md5.m"; sourceTree = "<group>"; };
+		EB5EC4B21933B220006B6516 /* ZKRegisttroller.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZKRegisttroller.xib; sourceTree = "<group>"; };
+		EB5EC4B51933B63E006B6516 /* avator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avator.png; sourceTree = "<group>"; };
 		EB9135891924B50800950FAF /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		EB91358B1924B51100950FAF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -203,6 +207,7 @@
 				EB39A0E61932780300C9194A /* ZKLoginViewController.h */,
 				EB39A0E71932780300C9194A /* ZKLoginViewController.m */,
 				EB39A0E81932780300C9194A /* ZKLoginViewController.xib */,
+				EB5EC4B21933B220006B6516 /* ZKRegisttroller.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -223,6 +228,7 @@
 		EB39A0E5193274CF00C9194A /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				EB5EC4B51933B63E006B6516 /* avator.png */,
 				EB39A0E0193269C900C9194A /* Welcome_background@2x.png */,
 			);
 			name = Sources;
@@ -315,6 +321,8 @@
 			files = (
 				EB19A3DA19228F79000327F0 /* InfoPlist.strings in Resources */,
 				EB39A0E1193269C900C9194A /* Welcome_background@2x.png in Resources */,
+				EB5EC4B61933B63E006B6516 /* avator.png in Resources */,
+				EB5EC4B41933B220006B6516 /* ZKRegisttroller.xib in Resources */,
 				EB19A3E219228F79000327F0 /* Images.xcassets in Resources */,
 				EB39A0EA1932780300C9194A /* ZKLoginViewController.xib in Resources */,
 			);

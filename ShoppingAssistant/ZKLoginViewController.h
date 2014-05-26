@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^LoginBlock)(BOOL success);
 @interface ZKLoginViewController : UIViewController
-
+@property (nonatomic, strong) LoginBlock block;
 @end

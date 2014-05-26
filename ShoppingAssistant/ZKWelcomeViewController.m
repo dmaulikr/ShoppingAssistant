@@ -92,9 +92,13 @@
 - (void)login:(id)sender
 {
     ZKLoginViewController *loginViewController = [[ZKLoginViewController alloc] initWithNibName:@"ZKLoginViewController" bundle:nil];
-    [self presentViewController:loginViewController animated:YES completion:^{
-        
-    }];
+    __weak ZKWelcomeViewController *me = self;
+    loginViewController.block = ^(BOOL success){
+        if (success) {
+            [me dismissViewControllerAnimated:NO completion:nil];
+        }
+    };
+    [self presentViewController:loginViewController animated:YES completion:nil];
 }
 
 - (void)join:(id)snder
