@@ -6,7 +6,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ZKRegisterViewController">
             <connections>
-                <outlet property="avatorImageView" destination="IYN-0j-f7s" id="fCC-1A-eQy"/>
                 <outlet property="emailTextField" destination="8pb-d0-KlL" id="aLx-Pk-dOn"/>
                 <outlet property="passwordTextField" destination="0HV-bB-mHs" id="bbC-98-eU5"/>
                 <outlet property="usernameTextField" destination="n5o-9G-u7h" id="Ncg-zM-fv8"/>
@@ -52,10 +51,6 @@
                         <action selector="textFieldReturnEditing:" destination="-1" eventType="editingDidEndOnExit" id="33g-8A-oRb"/>
                     </connections>
                 </textField>
-                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="avator.png" translatesAutoresizingMaskIntoConstraints="NO" id="IYN-0j-f7s">
-                    <rect key="frame" x="95" y="20" width="130" height="130"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -63,6 +58,5 @@
     </objects>
     <resources>
         <image name="Welcome_background.png" width="320" height="568"/>
-        <image name="avator.png" width="166" height="160"/>
     </resources>
 </document>

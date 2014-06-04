@@ -22,7 +22,7 @@
                     <color key="backgroundColor" red="0.36078432202339172" green="0.67058825492858887" blue="0.086274512112140656" alpha="1" colorSpace="deviceRGB"/>
                 </imageView>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="帐号" textAlignment="center" minimumFontSize="17" id="arO-ec-22v">
-                    <rect key="frame" x="20" y="29" width="280" height="44"/>
+                    <rect key="frame" x="20" y="163" width="280" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -32,7 +32,7 @@
                     </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码" textAlignment="center" minimumFontSize="17" id="BQI-dO-aqy">
-                    <rect key="frame" x="20" y="81" width="280" height="44"/>
+                    <rect key="frame" x="20" y="215" width="280" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>

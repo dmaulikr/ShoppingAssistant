@@ -66,8 +66,8 @@
 
 - (void)viewWillLayoutSubviews
 {
-    self.loginButton.frame = CGRectMake(170, 133, 130, 44);
-    self.cancelButton.frame = CGRectMake(20, 133, 130, 44);
+    self.loginButton.frame = CGRectMake(170, 267, 130, 44);
+    self.cancelButton.frame = CGRectMake(20, 267, 130, 44);
 }
 
 - (void)backgroundTap:(id)sender

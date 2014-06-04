@@ -10,14 +10,12 @@
 #import "SCNavigationController.h"
 
 @interface ZKRegisterViewController () <SCNavigationControllerDelegate>
-@property (weak, nonatomic) IBOutlet UIImageView *avatorImageView;
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (strong, nonatomic)  UIButton *registerButton;
 @property (strong, nonatomic)  UIButton *cancelButton;
 
-@property (strong, nonatomic) UIImage *avator;
 @end
 
 @implementation ZKRegisterViewController
@@ -64,9 +62,9 @@
     [self.view addSubview:self.registerButton];
     [self.view addSubview:self.cancelButton];
     
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(takePicture:)];
-    tapGesture.numberOfTapsRequired = 1;
-    [self.avatorImageView addGestureRecognizer:tapGesture];
+//    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(takePicture:)];
+//    tapGesture.numberOfTapsRequired = 1;
+//    [self.avatorImageView addGestureRecognizer:tapGesture];
 }
 
 - (void)didReceiveMemoryWarning
@@ -89,25 +87,21 @@
 
 - (void)register:(id)sender
 {
-    if (self.usernameTextField.text) {
+    if ([self.usernameTextField.text isEqualToString:@""]) {
         [SVProgressHUD showErrorWithStatus:@"请输入用户名"];
         return;
     }
-    if (self.usernameTextField.text) {
+    if ([self.passwordTextField.text isEqualToString:@""]) {
         [SVProgressHUD showErrorWithStatus:@"请输入密码"];
         return;
     }
-    if (self.usernameTextField.text) {
+    if ([self.emailTextField.text isEqualToString:@""]) {
         [SVProgressHUD showErrorWithStatus:@"请输入邮箱"];
-        return;
-    }
-    if (!self.avator) {
-        [SVProgressHUD showErrorWithStatus:@"请拍摄真人头像"];
         return;
     }
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *urlstr = [NSString stringWithFormat:@"%@/register?username=%@&password=%@&email=%@&avatar=%@", SERVER_URL, self.usernameTextField.text, [self.passwordTextField.text md5], self.emailTextField.text, [self.avator base64String]];
+        NSString *urlstr = [NSString stringWithFormat:@"%@/register?username=%@&password=%@&email=%@", SERVER_URL, self.usernameTextField.text, [self.passwordTextField.text md5], self.emailTextField.text];
         NSError *error = nil;
         NSString *downloadData = [NSString stringWithContentsOfURL:[NSURL URLWithString:urlstr] encoding:NSUTF8StringEncoding error:&error];
         if (error) {
@@ -123,7 +117,7 @@
             NSMutableDictionary *dict = [NSJSONSerialization JSONObjectWithData:[downloadData dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
             if ([[dict objectForKey:@"code"] intValue] == 0) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"登录失败" message:[dict objectForKey:@"msg"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"注册失败" message:[dict objectForKey:@"msg"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                     [alert show];
                     return;
                 });
@@ -136,7 +130,7 @@
                     }];
                 }
                 else {
-                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"登录失败" message:@"帐号密码错误" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"注册失败" message:@"用户名已存在" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                     [alert show];
                     return;
                 }
@@ -151,22 +145,22 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)takePicture:(UITapGestureRecognizer *)sender
-{
-    if (sender.state == UIGestureRecognizerStateEnded)
-    {
-        SCNavigationController *nav = [[SCNavigationController alloc] init];
-        nav.scNaigationDelegate = self;
-        [nav showCameraWithParentController:self];
-    }
-}
+//- (void)takePicture:(UITapGestureRecognizer *)sender
+//{
+//    if (sender.state == UIGestureRecognizerStateEnded)
+//    {
+//        SCNavigationController *nav = [[SCNavigationController alloc] init];
+//        nav.scNaigationDelegate = self;
+//        [nav showCameraWithParentController:self];
+//    }
+//}
 
 #pragma mark - SCNavigationControllerDelegate
 
-- (void)didTakePicture:(SCNavigationController *)navigationController image:(UIImage *)image
-{
-    self.avator = image;
-    self.avatorImageView.image = image;
-}
+//- (void)didTakePicture:(SCNavigationController *)navigationController image:(UIImage *)image
+//{
+//    self.avator = image;
+//    self.avatorImageView.image = image;
+//}
 
 @end
