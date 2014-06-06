@@ -25,4 +25,10 @@
     #import "NSString+md5.h"
     #import "UIImage+base64.h"
     #import "SVProgressHUD.h"
+    #import "AFNetworking.h"
+    #import "ZKSetAvatarViewController.h"
+    #import "LXActionSheet.h"
+    #import <MobileCoreServices/MobileCoreServices.h>
+    #import <SystemConfiguration/SystemConfiguration.h>
+    #import "MKNetworkKit.h"
 #endif

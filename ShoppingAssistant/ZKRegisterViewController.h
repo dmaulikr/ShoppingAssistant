@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^RegisterBlock)(BOOL success);
+typedef void(^RegisterBlock)(NSString *username);
 
 @interface ZKRegisterViewController : UIViewController
-@property (nonatomic, strong) RegisterBlock block;
+@property (nonatomic, strong) RegisterBlock registerBlock;
 @end

@@ -106,9 +106,15 @@
 {
     ZKRegisterViewController *registerViewController = [[ZKRegisterViewController alloc] initWithNibName:@"ZKRegisterViewController" bundle:nil];
     __weak ZKWelcomeViewController *me = self;
-    registerViewController.block = ^(BOOL success){
-        if (success) {
-            [me dismissViewControllerAnimated:NO completion:nil];
+    registerViewController.registerBlock = ^(NSString *username){
+        if (username && ![username isEqualToString:@""]) {
+            ZKSetAvatarViewController *setAvatarViewController = [[ZKSetAvatarViewController alloc] init];
+            setAvatarViewController.setAvatarBlock = ^(BOOL success) {
+                [me dismissViewControllerAnimated:NO completion:nil];
+            };
+            [me presentViewController:setAvatarViewController animated:YES completion:^{
+                
+            }];
         }
     };
     [self presentViewController:registerViewController animated:YES completion:nil];

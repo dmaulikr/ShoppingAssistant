@@ -92,7 +92,7 @@
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *urlstr = [NSString stringWithFormat:@"%@/login?username=%@&password=%@", SERVER_URL, self.usernameTextField.text, self.passwordTextField.text/*[self.passwordTextField.text md5]*/];
+        NSString *urlstr = [NSString stringWithFormat:@"%@/login?username=%@&password=%@", SERVER_URL, self.usernameTextField.text, [self.passwordTextField.text md5]];
         NSError *error = nil;
         NSString *downloadData = [NSString stringWithContentsOfURL:[NSURL URLWithString:urlstr] encoding:NSUTF8StringEncoding error:&error];
         if (error) {

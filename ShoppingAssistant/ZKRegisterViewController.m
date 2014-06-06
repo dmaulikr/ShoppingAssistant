@@ -7,9 +7,8 @@
 //
 
 #import "ZKRegisterViewController.h"
-#import "SCNavigationController.h"
 
-@interface ZKRegisterViewController () <SCNavigationControllerDelegate>
+@interface ZKRegisterViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
@@ -61,10 +60,6 @@
     [super viewDidLoad];
     [self.view addSubview:self.registerButton];
     [self.view addSubview:self.cancelButton];
-    
-//    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(takePicture:)];
-//    tapGesture.numberOfTapsRequired = 1;
-//    [self.avatorImageView addGestureRecognizer:tapGesture];
 }
 
 - (void)didReceiveMemoryWarning
@@ -124,9 +119,10 @@
             }
             else {
                 if ([[dict objectForKey:@"success"] boolValue]) {
+                    //注册成功
                     [ZKConstValue setLoginUsername:self.usernameTextField.text];
-                    [self dismissViewControllerAnimated:YES completion:^{
-                        self.block(YES);
+                    [self dismissViewControllerAnimated:NO completion:^{
+                        self.registerBlock(self.usernameTextField.text);
                     }];
                 }
                 else {
@@ -145,22 +141,6 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-//- (void)takePicture:(UITapGestureRecognizer *)sender
-//{
-//    if (sender.state == UIGestureRecognizerStateEnded)
-//    {
-//        SCNavigationController *nav = [[SCNavigationController alloc] init];
-//        nav.scNaigationDelegate = self;
-//        [nav showCameraWithParentController:self];
-//    }
-//}
 
-#pragma mark - SCNavigationControllerDelegate
-
-//- (void)didTakePicture:(SCNavigationController *)navigationController image:(UIImage *)image
-//{
-//    self.avator = image;
-//    self.avatorImageView.image = image;
-//}
 
 @end
