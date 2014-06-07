@@ -89,6 +89,7 @@
     MKNetworkEngine *networkEngine = [[MKNetworkEngine alloc] initWithHostName:SERVER_URL_WITHOUT_HTTP];
     MKNetworkOperation *networkOperation = [networkEngine operationWithPath:[NSString stringWithFormat:@"avatar?username=%@", username] params:nil httpMethod:@"POST"];
     [networkOperation addFile:pngPath forKey:@"file" mimeType:@"image/png"];
+    [networkOperation addHeaders:[NSDictionary dictionaryWithObjectsAndKeys:@"Content-Type", @"multipart/form-data", nil]];
     [networkOperation setFreezable:YES];
     
     [networkOperation addCompletionHandler:^(MKNetworkOperation *completedOperation) {
@@ -97,7 +98,11 @@
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
         NSLog(@"Upload avatar error: %@", error);
     }];
+    [networkOperation onUploadProgressChanged:^(double progress) {
+        NSLog(@"Upload file progress: %.2f", progress*100.0);
+    }];
     [networkEngine enqueueOperation:networkOperation];
+    
 }
 
 //- (void)postImage:(UIImage *)image
