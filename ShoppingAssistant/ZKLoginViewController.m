@@ -90,14 +90,14 @@
 
 - (void)login:(id)sender
 {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [SVProgressHUD show];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *urlstr = [NSString stringWithFormat:@"%@/login?username=%@&password=%@", SERVER_URL, self.usernameTextField.text, [self.passwordTextField.text md5]];
         NSError *error = nil;
         NSString *downloadData = [NSString stringWithContentsOfURL:[NSURL URLWithString:urlstr] encoding:NSUTF8StringEncoding error:&error];
         if (error) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
+               [SVProgressHUD dismiss];
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"登录失败" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alert show];
             });
@@ -105,7 +105,7 @@
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             NSError *error = nil;
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [SVProgressHUD dismiss];
             NSMutableDictionary *dict = [NSJSONSerialization JSONObjectWithData:[downloadData dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
             if ([[dict objectForKey:@"code"] intValue] == 0) {
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -119,6 +119,8 @@
                     [ZKConstValue setLoginUsername:self.usernameTextField.text];
                     [self dismissViewControllerAnimated:YES completion:^{
                         self.block(YES);
+                        [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_NOTIFICATION object:nil];
+                        [ZKConstValue setLogin:YES];
                     }];
                 }
                 else {

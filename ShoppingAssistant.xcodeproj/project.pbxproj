@@ -12,6 +12,8 @@
 		EB161F7D194103D200BD0D0A /* LXActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = EB161F7C194103D200BD0D0A /* LXActionSheet.m */; };
 		EB161F7F1941A1C700BD0D0A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB161F7E1941A1C700BD0D0A /* SystemConfiguration.framework */; };
 		EB161F811941A1CE00BD0D0A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB161F801941A1CE00BD0D0A /* MobileCoreServices.framework */; };
+		EB161F841944355700BD0D0A /* ZKSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB161F831944355700BD0D0A /* ZKSettingsViewController.m */; };
+		EB161F8719444C7200BD0D0A /* ZKUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB161F8619444C7200BD0D0A /* ZKUserViewController.m */; };
 		EB19A3D019228F79000327F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB19A3CF19228F79000327F0 /* Foundation.framework */; };
 		EB19A3D219228F79000327F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB19A3D119228F79000327F0 /* CoreGraphics.framework */; };
 		EB19A3D419228F79000327F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB19A3D319228F79000327F0 /* UIKit.framework */; };
@@ -66,6 +68,10 @@
 		EB161F7C194103D200BD0D0A /* LXActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXActionSheet.m; sourceTree = "<group>"; };
 		EB161F7E1941A1C700BD0D0A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		EB161F801941A1CE00BD0D0A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		EB161F821944355700BD0D0A /* ZKSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKSettingsViewController.h; sourceTree = "<group>"; };
+		EB161F831944355700BD0D0A /* ZKSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKSettingsViewController.m; sourceTree = "<group>"; };
+		EB161F8519444C7200BD0D0A /* ZKUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKUserViewController.h; sourceTree = "<group>"; };
+		EB161F8619444C7200BD0D0A /* ZKUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKUserViewController.m; sourceTree = "<group>"; };
 		EB19A3CC19228F79000327F0 /* ShoppingAssistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingAssistant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB19A3CF19228F79000327F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EB19A3D119228F79000327F0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -260,6 +266,10 @@
 				EB5EC4BC1933B75E006B6516 /* ZKRegisterViewController.xib */,
 				EB161F751940FD0F00BD0D0A /* ZKSetAvatarViewController.h */,
 				EB161F761940FD0F00BD0D0A /* ZKSetAvatarViewController.m */,
+				EB161F821944355700BD0D0A /* ZKSettingsViewController.h */,
+				EB161F831944355700BD0D0A /* ZKSettingsViewController.m */,
+				EB161F8519444C7200BD0D0A /* ZKUserViewController.h */,
+				EB161F8619444C7200BD0D0A /* ZKUserViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -444,11 +454,13 @@
 				EB19A40719229F95000327F0 /* ZKMenuViewController.m in Sources */,
 				EB39A0ED1932F53000C9194A /* NSString+md5.m in Sources */,
 				EB19A3DC19228F79000327F0 /* main.m in Sources */,
+				EB161F8719444C7200BD0D0A /* ZKUserViewController.m in Sources */,
 				EB19A40119229ADD000327F0 /* ZKNavigationController.m in Sources */,
 				EB161F781940FD0F00BD0D0A /* ZKSetAvatarViewController.m in Sources */,
 				EB5EC4BD1933B75E006B6516 /* ZKRegisterViewController.m in Sources */,
 				EB39A0E91932780300C9194A /* ZKLoginViewController.m in Sources */,
 				EB161F7D194103D200BD0D0A /* LXActionSheet.m in Sources */,
+				EB161F841944355700BD0D0A /* ZKSettingsViewController.m in Sources */,
 				EB39A0DF193263CD00C9194A /* UIImage+Appest.m in Sources */,
 				EB5EC51A1933C5E0006B6516 /* UIImage+base64.m in Sources */,
 				EB19A40419229EC4000327F0 /* ZKHomeViewController.m in Sources */,

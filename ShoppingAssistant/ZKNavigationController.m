@@ -27,6 +27,7 @@
 {
     [super viewDidLoad];
     [self.view addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognized:)]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLogin) name:LOGIN_NOTIFICATION object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -39,7 +40,12 @@
     [self.frostedViewController presentMenuViewController];
 }
 
+- (void)handleLogin
+{
+    ZKHomeViewController *homeViewController = [[ZKHomeViewController alloc] init];
 
+    self.viewControllers = @[homeViewController];
+}
 #pragma mark - Gesture recognizer
 
 - (void)panGestureRecognized:(UIPanGestureRecognizer *)sender

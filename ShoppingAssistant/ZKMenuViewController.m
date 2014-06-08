@@ -7,9 +7,11 @@
 //
 
 #import "ZKMenuViewController.h"
+#import "ZKSettingsViewController.h"
+#import "ZKAppDelegate.h"
+#import "ZKUserViewController.h"
 
 @interface ZKMenuViewController ()
-
 @end
 
 @implementation ZKMenuViewController
@@ -30,32 +32,8 @@
     self.tableView.dataSource = self;
     self.tableView.opaque = NO;
     self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.tableHeaderView = ({
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 184.0f)];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, 100, 100)];
-        imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-        imageView.image = [UIImage imageNamed:@"avatar.jpg"];
-        imageView.layer.masksToBounds = YES;
-        imageView.layer.cornerRadius = 50.0;
-        imageView.layer.borderColor = [UIColor whiteColor].CGColor;
-        imageView.layer.borderWidth = 3.0f;
-        imageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
-        imageView.layer.shouldRasterize = YES;
-        imageView.clipsToBounds = YES;
-        
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 150, 0, 24)];
-        label.text = @"Roman Efimov";
-        label.font = [UIFont fontWithName:@"HelveticaNeue" size:21];
-        label.backgroundColor = [UIColor clearColor];
-        label.textColor = [UIColor colorWithRed:62/255.0f green:68/255.0f blue:75/255.0f alpha:1.0f];
-        [label sizeToFit];
-        label.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-        
-        [view addSubview:imageView];
-        [view addSubview:label];
-        view;
-    });
-
+    self.tableView.scrollEnabled = NO;
+    self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (void)didReceiveMemoryWarning
@@ -63,8 +41,62 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)viewWillLayoutSubviews
+{
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.tableView reloadData];
+}
 #pragma mark -
 #pragma mark UITableView Delegate
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/avatar.png"];
+    UIImage *avatar = [UIImage imageWithContentsOfFile:path];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 184.0f)];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, 100, 100)];
+    imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    if (avatar) {
+        imageView.image = avatar;
+    }
+    else {
+        imageView.image = [UIImage imageNamed:@"avator"];
+    }
+    imageView.layer.masksToBounds = YES;
+    imageView.layer.cornerRadius = 50.0;
+    imageView.layer.borderColor = [UIColor whiteColor].CGColor;
+    imageView.layer.borderWidth = 3.0f;
+    imageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    imageView.layer.shouldRasterize = YES;
+    imageView.clipsToBounds = YES;
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 150, 0, 24)];
+    NSString *username = [ZKConstValue getLoginStatus];
+    if (username && ![username isEqualToString:@""]) {
+        label.text = username;
+    }
+    label.font = [UIFont fontWithName:@"HelveticaNeue" size:21];
+    label.backgroundColor = [UIColor clearColor];
+    label.textColor = [UIColor colorWithRed:62/255.0f green:68/255.0f blue:75/255.0f alpha:1.0f];
+    [label sizeToFit];
+    label.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    
+    
+    
+    [view addSubview:imageView];
+    [view addSubview:label];
+    
+    return view;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 184.0f;
+}
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -78,12 +110,20 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UINavigationController *navigationController = (UINavigationController *)self.frostedViewController.contentViewController;
     
-    if (indexPath.section == 0 && indexPath.row == 0) {
+    if (indexPath.row == 0) {
         ZKHomeViewController *homeViewController = [[ZKHomeViewController alloc] init];
         navigationController.viewControllers = @[homeViewController];
-    } else {
+    } else if (indexPath.row == 1) {
         ZKHomeViewController *secondViewController = [[ZKHomeViewController alloc] init];
         navigationController.viewControllers = @[secondViewController];
+    } else if (indexPath.row == 2) {
+        ZKUserViewController *userViewController = [[ZKUserViewController alloc] init];
+        [ZKAppDelegate SetSubViewExternNone:userViewController];
+        navigationController.viewControllers = @[userViewController];
+    } else if (indexPath.row == 3) {
+        ZKSettingsViewController *settingsViewContoller = [[ZKSettingsViewController alloc] init];
+        [ZKAppDelegate SetSubViewExternNone:settingsViewContoller];
+        navigationController.viewControllers = @[settingsViewContoller];
     }
     
     [self.frostedViewController hideMenuViewController];
@@ -104,7 +144,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
 {
-    return 3;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -118,8 +158,9 @@
     }
     
     if (indexPath.section == 0) {
-        NSArray *titles = @[@"Home", @"Profile", @"Chats"];
+        NSArray *titles = @[@"主页", @"所有", @"用户", @"设置"];
         cell.textLabel.text = titles[indexPath.row];
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
     }
     
     return cell;

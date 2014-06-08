@@ -25,11 +25,42 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"Home Controller";
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu"
+    self.title = @"购物单";
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"菜单"
                                                                              style:UIBarButtonItemStylePlain
                                                                             target:(ZKNavigationController *)self.navigationController
                                                                             action:@selector(showMenu)];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLogin) name:LOGIN_NOTIFICATION object:nil];
+    
+    if ([ZKConstValue getLogin]) {
+        [self handleLogin];
+        [ZKConstValue setLogin:NO];
+    }
+}
+
+#pragma mark - private method
+- (void)handleLogin
+{
+    [SVProgressHUD show];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    NSString *username = [ZKConstValue getLoginStatus];
+    NSString *imageUrl = [NSString stringWithFormat:@"%@/avatar?username=%@", SERVER_URL, username];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    NSURLSessionDownloadTask *getImageTask = [session downloadTaskWithURL:[NSURL URLWithString:imageUrl] completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            [SVProgressHUD dismiss];
+        });
+        if (error) {
+            NSLog(@"error:%@", error.description);
+            return ;
+        }
+        NSData *downloadedImage = [NSData dataWithContentsOfURL:location];
+        NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/avatar.png"];
+        [downloadedImage writeToFile:path atomically:YES];
+        
+    }];
+    [getImageTask resume];
 }
 
 - (void)didReceiveMemoryWarning

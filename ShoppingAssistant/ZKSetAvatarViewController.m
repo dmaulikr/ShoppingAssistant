@@ -77,61 +77,76 @@
 
 - (void)postImage:(UIImage *)image
 {
+    [SVProgressHUD show];
+    // Build the request body
+    NSString *boundary = @"SportuondoFormBoundary";
+    NSMutableData *body = [NSMutableData data];
     NSString *username = [ZKConstValue getLoginStatus];
     if (!username && [username isEqualToString:@""]) {
         NSLog(@"ERROR: postImage,username is valide");
         return;
     }
-    NSString  *pngPath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/avatar_%@.png", username]];
-    NSData *imageData = UIImagePNGRepresentation(image);
-    [imageData writeToFile:pngPath atomically:YES];
-    
-    MKNetworkEngine *networkEngine = [[MKNetworkEngine alloc] initWithHostName:SERVER_URL_WITHOUT_HTTP];
-    MKNetworkOperation *networkOperation = [networkEngine operationWithPath:[NSString stringWithFormat:@"avatar?username=%@", username] params:nil httpMethod:@"POST"];
-    [networkOperation addFile:pngPath forKey:@"file" mimeType:@"image/png"];
-    [networkOperation addHeaders:[NSDictionary dictionaryWithObjectsAndKeys:@"Content-Type", @"multipart/form-data", nil]];
-    [networkOperation setFreezable:YES];
-    
-    [networkOperation addCompletionHandler:^(MKNetworkOperation *completedOperation) {
-        NSString *responseString = [completedOperation responseString];
-        NSLog(@"server response: %@",responseString);
-    } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
-        NSLog(@"Upload avatar error: %@", error);
-    }];
-    [networkOperation onUploadProgressChanged:^(double progress) {
-        NSLog(@"Upload file progress: %.2f", progress*100.0);
-    }];
-    [networkEngine enqueueOperation:networkOperation];
-    
-}
 
-//- (void)postImage:(UIImage *)image
-//{
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    NSString *username = [ZKConstValue getLoginStatus];
-//    if (!username && [username isEqualToString:@""]) {
-//        NSLog(@"ERROR: postImage,username is valide");
-//        return;
-//    }
-////    NSDictionary *parameters = @{@"username": username};
-//    NSData *imageData;
-//    if (UIImagePNGRepresentation(image) == nil) {
-//        imageData = UIImageJPEGRepresentation(image, 1);
-//    } else {
-//        imageData = UIImagePNGRepresentation(image);
-//    }
-//
-//    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-//
-//    NSURLSession *upLoadSession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
-//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/avatar",SERVER_URL]];
-//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-//    [request setHTTPMethod:@"POST"];
-//    self.uploadTask = [upLoadSession uploadTaskWithRequest:request fromData:imageData];
-//    NSLog(@"%@",[[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
-//    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-//    [self.uploadTask resume];
-//}
+    // Body part for "deviceId" parameter. This is a string.
+    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", @"username"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"%@\r\n", username] dataUsingEncoding:NSUTF8StringEncoding]];
+    // Body part for the attachament. This is an image.
+    NSData *imageData = UIImagePNGRepresentation(image);
+    if (imageData) {
+        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"image.png\"\r\n", @"image"] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[@"Content-Type: image/pngs\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:imageData];
+        [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+    [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    // Setup the session
+    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    sessionConfiguration.HTTPAdditionalHeaders = @{
+                                                   @"Accept"        : @"application/json",
+                                                   @"Content-Type"  : [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary]
+                                                   };
+    
+    // We can use the delegate to track upload progress
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:nil];
+
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/avatar?username=%@",SERVER_URL,username]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    request.HTTPMethod = @"POST";
+    request.HTTPBody = body;
+    NSURLSessionDataTask *uploadTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (!error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismiss];
+                NSError *err = nil;
+                NSMutableDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&err];
+                if ([[dict objectForKey:@"code"] intValue] == 1) {
+                    [SVProgressHUD showSuccessWithStatus:@"上传成功"];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [self dismissViewControllerAnimated:YES completion:^{
+                            self.setAvatarBlock(YES);
+                            [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_NOTIFICATION object:nil];
+                            [ZKConstValue setLogin:YES];
+                        }];
+                    });
+                }
+                else {
+                    [SVProgressHUD showErrorWithStatus:@"上传头像失败"];
+                    NSLog(@"上传头像失败:%@",[dict objectForKey:@"msg"]);
+                }
+            });
+        }
+        else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismiss];
+                [SVProgressHUD showErrorWithStatus:@"上传头像失败"];
+            });
+        }
+    }];
+    [uploadTask resume];
+}
 #pragma mark - NSURLSessionTaskDelegate
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 {
@@ -140,17 +155,6 @@
     });
 }
 
-- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
-{
-    if (!error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-        });
-    }
-    else {
-        
-    }
-}
 #pragma mark - LXActionSheetDlegate
 - (void)didClickOnButtonIndex:(NSInteger *)buttonIndex
 {

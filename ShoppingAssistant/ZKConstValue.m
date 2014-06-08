@@ -20,4 +20,14 @@
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"loginstatus_username"];
 }
 
++ (void)setLogin:(BOOL)status
+{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:status] forKey:@"loginstatus"];
+}
+
++ (BOOL)getLogin
+{
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"loginstatus"] boolValue];
+}
+
 @end

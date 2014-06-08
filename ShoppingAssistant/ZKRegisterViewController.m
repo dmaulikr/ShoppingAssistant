@@ -94,21 +94,21 @@
         [SVProgressHUD showErrorWithStatus:@"请输入邮箱"];
         return;
     }
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+   [SVProgressHUD show];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *urlstr = [NSString stringWithFormat:@"%@/register?username=%@&password=%@&email=%@", SERVER_URL, self.usernameTextField.text, [self.passwordTextField.text md5], self.emailTextField.text];
         NSError *error = nil;
         NSString *downloadData = [NSString stringWithContentsOfURL:[NSURL URLWithString:urlstr] encoding:NSUTF8StringEncoding error:&error];
         if (error) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [SVProgressHUD dismiss];
                 [SVProgressHUD showErrorWithStatus:@"注册失败"];
             });
             return;
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             NSError *error = nil;
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [SVProgressHUD dismiss];
             NSMutableDictionary *dict = [NSJSONSerialization JSONObjectWithData:[downloadData dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
             if ([[dict objectForKey:@"code"] intValue] == 0) {
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -130,7 +130,6 @@
                     [alert show];
                     return;
                 }
-                
             }
         });
     });
