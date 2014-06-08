@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-#define SERVER_URL @"http://192.168.0.100:1337"
+#define SERVER_URL @"http://172.20.10.4:1337"
 #define SERVER_URL_WITHOUT_HTTP @"192.168.0.100:1337"
 
 #define LOGIN_NOTIFICATION @"loginNotification"
