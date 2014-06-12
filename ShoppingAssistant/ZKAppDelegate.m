@@ -31,7 +31,9 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    ZKNavigationController *navigationController = [[ZKNavigationController alloc] initWithRootViewController:[[ZKHomeViewController alloc] init]];
+    ZKHomeViewController *homeController = [[ZKHomeViewController alloc] init];
+    [ZKAppDelegate SetSubViewExternNone:homeController];
+    ZKNavigationController *navigationController = [[ZKNavigationController alloc] initWithRootViewController:homeController];
     ZKMenuViewController *menuController = [[ZKMenuViewController alloc] initWithStyle:UITableViewStylePlain];
     REFrostedViewController *frostedViewController = [[REFrostedViewController alloc] initWithContentViewController:navigationController menuViewController:menuController];
     frostedViewController.direction = REFrostedViewControllerDirectionLeft;
@@ -41,7 +43,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-//    [self initLocationManger];
+    [self initLocationManger];
     
     NSString *loginStatus = [ZKConstValue getLoginStatus];
     if (!loginStatus || [loginStatus isEqualToString:@""]) {
@@ -61,9 +63,11 @@
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     
-    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"0C8CBFDD-B4B8-1DBF-C966-200713AEBB25"];
+    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"74278BDA-B644-4520-8F0C-720EAF059935"];//@"0C8CBFDD-B4B8-1DBF-C966-200713AEBB25"];
     CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:@"iBeacon"];
     
+    [self.locationManager requestAlwaysAuthorization];
+    [self.locationManager requestWhenInUseAuthorization];
     region.notifyEntryStateOnDisplay = YES;
     if ([CLLocationManager isMonitoringAvailableForClass:[CLBeaconRegion class]])
     {
@@ -116,11 +120,8 @@
       didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
 {
     NSLog(@"-------------> didDetermineState");
-    
-//    [self.locationManager requestStateForRegion:region];
     if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive)
     {
-        // don't send any notifications
         return;
     }
     if (state == CLRegionStateInside)

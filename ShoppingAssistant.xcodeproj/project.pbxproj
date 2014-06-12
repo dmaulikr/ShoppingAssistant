@@ -14,6 +14,7 @@
 		EB161F811941A1CE00BD0D0A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB161F801941A1CE00BD0D0A /* MobileCoreServices.framework */; };
 		EB161F841944355700BD0D0A /* ZKSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB161F831944355700BD0D0A /* ZKSettingsViewController.m */; };
 		EB161F8719444C7200BD0D0A /* ZKUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB161F8619444C7200BD0D0A /* ZKUserViewController.m */; };
+		EB161F8A1944F9EA00BD0D0A /* ZKAllViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB161F891944F9EA00BD0D0A /* ZKAllViewController.m */; };
 		EB19A3D019228F79000327F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB19A3CF19228F79000327F0 /* Foundation.framework */; };
 		EB19A3D219228F79000327F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB19A3D119228F79000327F0 /* CoreGraphics.framework */; };
 		EB19A3D419228F79000327F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB19A3D319228F79000327F0 /* UIKit.framework */; };
@@ -29,6 +30,11 @@
 		EB19A40119229ADD000327F0 /* ZKNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB19A40019229ADD000327F0 /* ZKNavigationController.m */; };
 		EB19A40419229EC4000327F0 /* ZKHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB19A40319229EC4000327F0 /* ZKHomeViewController.m */; };
 		EB19A40719229F95000327F0 /* ZKMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB19A40619229F95000327F0 /* ZKMenuViewController.m */; };
+		EB2A9FF0194888620021BBA6 /* ZKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2A9FEF194888620021BBA6 /* ZKCategory.m */; };
+		EB2A9FF4194890BC0021BBA6 /* ZKItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2A9FF2194890BC0021BBA6 /* ZKItemTableViewCell.m */; };
+		EB2A9FF5194890BC0021BBA6 /* ZKItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB2A9FF3194890BC0021BBA6 /* ZKItemTableViewCell.xib */; };
+		EB2A9FF81948935C0021BBA6 /* ZKCategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2A9FF71948935C0021BBA6 /* ZKCategoryTableViewController.m */; };
+		EB2A9FFB194893910021BBA6 /* ZKItem.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2A9FFA194893910021BBA6 /* ZKItem.m */; };
 		EB39A0D919325F1D00C9194A /* ZKConstValue.m in Sources */ = {isa = PBXBuildFile; fileRef = EB39A0D819325F1D00C9194A /* ZKConstValue.m */; };
 		EB39A0DC1932622A00C9194A /* ZKWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB39A0DB1932622A00C9194A /* ZKWelcomeViewController.m */; };
 		EB39A0DF193263CD00C9194A /* UIImage+Appest.m in Sources */ = {isa = PBXBuildFile; fileRef = EB39A0DE193263CD00C9194A /* UIImage+Appest.m */; };
@@ -72,6 +78,8 @@
 		EB161F831944355700BD0D0A /* ZKSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKSettingsViewController.m; sourceTree = "<group>"; };
 		EB161F8519444C7200BD0D0A /* ZKUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKUserViewController.h; sourceTree = "<group>"; };
 		EB161F8619444C7200BD0D0A /* ZKUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKUserViewController.m; sourceTree = "<group>"; };
+		EB161F881944F9EA00BD0D0A /* ZKAllViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKAllViewController.h; sourceTree = "<group>"; };
+		EB161F891944F9EA00BD0D0A /* ZKAllViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKAllViewController.m; sourceTree = "<group>"; };
 		EB19A3CC19228F79000327F0 /* ShoppingAssistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingAssistant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB19A3CF19228F79000327F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EB19A3D119228F79000327F0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -94,6 +102,15 @@
 		EB19A40319229EC4000327F0 /* ZKHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKHomeViewController.m; sourceTree = "<group>"; };
 		EB19A40519229F95000327F0 /* ZKMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKMenuViewController.h; sourceTree = "<group>"; };
 		EB19A40619229F95000327F0 /* ZKMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKMenuViewController.m; sourceTree = "<group>"; };
+		EB2A9FEE194888620021BBA6 /* ZKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKCategory.h; sourceTree = "<group>"; };
+		EB2A9FEF194888620021BBA6 /* ZKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKCategory.m; sourceTree = "<group>"; };
+		EB2A9FF1194890BC0021BBA6 /* ZKItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKItemTableViewCell.h; sourceTree = "<group>"; };
+		EB2A9FF2194890BC0021BBA6 /* ZKItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKItemTableViewCell.m; sourceTree = "<group>"; };
+		EB2A9FF3194890BC0021BBA6 /* ZKItemTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZKItemTableViewCell.xib; sourceTree = "<group>"; };
+		EB2A9FF61948935C0021BBA6 /* ZKCategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKCategoryTableViewController.h; sourceTree = "<group>"; };
+		EB2A9FF71948935C0021BBA6 /* ZKCategoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKCategoryTableViewController.m; sourceTree = "<group>"; };
+		EB2A9FF9194893910021BBA6 /* ZKItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKItem.h; sourceTree = "<group>"; };
+		EB2A9FFA194893910021BBA6 /* ZKItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKItem.m; sourceTree = "<group>"; };
 		EB39A0D719325F1D00C9194A /* ZKConstValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKConstValue.h; sourceTree = "<group>"; };
 		EB39A0D819325F1D00C9194A /* ZKConstValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKConstValue.m; sourceTree = "<group>"; };
 		EB39A0DA1932622A00C9194A /* ZKWelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKWelcomeViewController.h; sourceTree = "<group>"; };
@@ -206,6 +223,7 @@
 		EB19A3D519228F79000327F0 /* ShoppingAssistant */ = {
 			isa = PBXGroup;
 			children = (
+				EB2A9FED194888460021BBA6 /* Models */,
 				EB5EC4C71933BADB006B6516 /* OpenSource */,
 				EB39A0E5193274CF00C9194A /* Sources */,
 				EB39A0D619325EF700C9194A /* Utils */,
@@ -270,8 +288,26 @@
 				EB161F831944355700BD0D0A /* ZKSettingsViewController.m */,
 				EB161F8519444C7200BD0D0A /* ZKUserViewController.h */,
 				EB161F8619444C7200BD0D0A /* ZKUserViewController.m */,
+				EB161F881944F9EA00BD0D0A /* ZKAllViewController.h */,
+				EB161F891944F9EA00BD0D0A /* ZKAllViewController.m */,
+				EB2A9FF1194890BC0021BBA6 /* ZKItemTableViewCell.h */,
+				EB2A9FF2194890BC0021BBA6 /* ZKItemTableViewCell.m */,
+				EB2A9FF3194890BC0021BBA6 /* ZKItemTableViewCell.xib */,
+				EB2A9FF61948935C0021BBA6 /* ZKCategoryTableViewController.h */,
+				EB2A9FF71948935C0021BBA6 /* ZKCategoryTableViewController.m */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		EB2A9FED194888460021BBA6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EB2A9FEE194888620021BBA6 /* ZKCategory.h */,
+				EB2A9FEF194888620021BBA6 /* ZKCategory.m */,
+				EB2A9FF9194893910021BBA6 /* ZKItem.h */,
+				EB2A9FFA194893910021BBA6 /* ZKItem.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		EB39A0D619325EF700C9194A /* Utils */ = {
@@ -399,6 +435,7 @@
 				EB19A3E219228F79000327F0 /* Images.xcassets in Resources */,
 				EB5EC5161933C14C006B6516 /* icon_120x120.png in Resources */,
 				EB39A0EA1932780300C9194A /* ZKLoginViewController.xib in Resources */,
+				EB2A9FF5194890BC0021BBA6 /* ZKItemTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,13 +493,18 @@
 				EB19A3DC19228F79000327F0 /* main.m in Sources */,
 				EB161F8719444C7200BD0D0A /* ZKUserViewController.m in Sources */,
 				EB19A40119229ADD000327F0 /* ZKNavigationController.m in Sources */,
+				EB2A9FFB194893910021BBA6 /* ZKItem.m in Sources */,
 				EB161F781940FD0F00BD0D0A /* ZKSetAvatarViewController.m in Sources */,
 				EB5EC4BD1933B75E006B6516 /* ZKRegisterViewController.m in Sources */,
+				EB2A9FF81948935C0021BBA6 /* ZKCategoryTableViewController.m in Sources */,
+				EB2A9FF4194890BC0021BBA6 /* ZKItemTableViewCell.m in Sources */,
 				EB39A0E91932780300C9194A /* ZKLoginViewController.m in Sources */,
 				EB161F7D194103D200BD0D0A /* LXActionSheet.m in Sources */,
 				EB161F841944355700BD0D0A /* ZKSettingsViewController.m in Sources */,
 				EB39A0DF193263CD00C9194A /* UIImage+Appest.m in Sources */,
+				EB2A9FF0194888620021BBA6 /* ZKCategory.m in Sources */,
 				EB5EC51A1933C5E0006B6516 /* UIImage+base64.m in Sources */,
+				EB161F8A1944F9EA00BD0D0A /* ZKAllViewController.m in Sources */,
 				EB19A40419229EC4000327F0 /* ZKHomeViewController.m in Sources */,
 				EB39A0D919325F1D00C9194A /* ZKConstValue.m in Sources */,
 				EB19A3E019228F79000327F0 /* ZKAppDelegate.m in Sources */,

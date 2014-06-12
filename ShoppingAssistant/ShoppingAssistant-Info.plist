@@ -36,6 +36,7 @@
 	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>bluetooth-central</string>
 		<string>bluetooth-peripheral</string>
 		<string>location</string>
 	</array>
@@ -47,5 +48,10 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Needs To Use</string>
+    
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Needs To Use</string>
 </dict>
 </plist>

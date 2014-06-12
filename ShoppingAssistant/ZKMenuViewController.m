@@ -10,6 +10,7 @@
 #import "ZKSettingsViewController.h"
 #import "ZKAppDelegate.h"
 #import "ZKUserViewController.h"
+#import "ZKAllViewController.h"
 
 @interface ZKMenuViewController ()
 @end
@@ -112,10 +113,12 @@
     
     if (indexPath.row == 0) {
         ZKHomeViewController *homeViewController = [[ZKHomeViewController alloc] init];
+        [ZKAppDelegate SetSubViewExternNone:homeViewController];
         navigationController.viewControllers = @[homeViewController];
     } else if (indexPath.row == 1) {
-        ZKHomeViewController *secondViewController = [[ZKHomeViewController alloc] init];
-        navigationController.viewControllers = @[secondViewController];
+        ZKAllViewController *allViewController = [[ZKAllViewController alloc] init];
+         [ZKAppDelegate SetSubViewExternNone:allViewController];
+        navigationController.viewControllers = @[allViewController];
     } else if (indexPath.row == 2) {
         ZKUserViewController *userViewController = [[ZKUserViewController alloc] init];
         [ZKAppDelegate SetSubViewExternNone:userViewController];

@@ -30,4 +30,6 @@
     #import <MobileCoreServices/MobileCoreServices.h>
     #import <SystemConfiguration/SystemConfiguration.h>
 //    #import "MKNetworkKit.h"
+    #import "ZKAppDelegate.h"
+    #import "XHRefreshControl.h"
 #endif

@@ -18,3 +18,9 @@
 #define COCOAPODS_VERSION_MINOR_SVProgressHUD 0
 #define COCOAPODS_VERSION_PATCH_SVProgressHUD 0
 
+// XHRefreshControl
+#define COCOAPODS_POD_AVAILABLE_XHRefreshControl
+#define COCOAPODS_VERSION_MAJOR_XHRefreshControl 0
+#define COCOAPODS_VERSION_MINOR_XHRefreshControl 1
+#define COCOAPODS_VERSION_PATCH_XHRefreshControl 2
+
