@@ -206,9 +206,11 @@
     UINib *nib = [UINib nibWithNibName:@"ZKItemTableViewCell" bundle:nil];
     [tableView registerNib:nib forCellReuseIdentifier:cellIdentifier];
     ZKItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    cell.nameLabel.text = [self.items[indexPath.row] name];
-    cell.priceLabel.text = [NSString stringWithFormat:@"¥%.2f",[self.items[indexPath.row] price]];
-    [self downloadImage:[self.items[indexPath.row] itemId] withIndexPath:indexPath];
+    if (self.items.count != 0) {
+        cell.nameLabel.text = [self.items[indexPath.row] name];
+        cell.priceLabel.text = [NSString stringWithFormat:@"¥%.2f",[self.items[indexPath.row] price]];
+        [self downloadImage:[self.items[indexPath.row] itemId] withIndexPath:indexPath];
+    }
     
     UIView *devideView = [[UIView alloc] initWithFrame:CGRectMake(0, 99, 320, 1)];
     devideView.backgroundColor = [UIColor colorWithRed:0.82f green:0.82f blue:0.82f alpha:1.00f];

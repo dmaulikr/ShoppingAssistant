@@ -43,7 +43,7 @@
 - (void)handleLogin
 {
     ZKHomeViewController *homeViewController = [[ZKHomeViewController alloc] init];
-
+    [ZKAppDelegate SetSubViewExternNone:homeViewController];
     self.viewControllers = @[homeViewController];
 }
 #pragma mark - Gesture recognizer

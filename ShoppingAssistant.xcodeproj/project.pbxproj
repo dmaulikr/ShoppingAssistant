@@ -15,6 +15,7 @@
 		EB161F841944355700BD0D0A /* ZKSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB161F831944355700BD0D0A /* ZKSettingsViewController.m */; };
 		EB161F8719444C7200BD0D0A /* ZKUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB161F8619444C7200BD0D0A /* ZKUserViewController.m */; };
 		EB161F8A1944F9EA00BD0D0A /* ZKAllViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB161F891944F9EA00BD0D0A /* ZKAllViewController.m */; };
+		EB18D81B194A64AF006B44DE /* ZKPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB18D81A194A64AF006B44DE /* ZKPayViewController.m */; };
 		EB19A3D019228F79000327F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB19A3CF19228F79000327F0 /* Foundation.framework */; };
 		EB19A3D219228F79000327F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB19A3D119228F79000327F0 /* CoreGraphics.framework */; };
 		EB19A3D419228F79000327F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB19A3D319228F79000327F0 /* UIKit.framework */; };
@@ -80,6 +81,8 @@
 		EB161F8619444C7200BD0D0A /* ZKUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKUserViewController.m; sourceTree = "<group>"; };
 		EB161F881944F9EA00BD0D0A /* ZKAllViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKAllViewController.h; sourceTree = "<group>"; };
 		EB161F891944F9EA00BD0D0A /* ZKAllViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKAllViewController.m; sourceTree = "<group>"; };
+		EB18D819194A64AF006B44DE /* ZKPayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKPayViewController.h; sourceTree = "<group>"; };
+		EB18D81A194A64AF006B44DE /* ZKPayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKPayViewController.m; sourceTree = "<group>"; };
 		EB19A3CC19228F79000327F0 /* ShoppingAssistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoppingAssistant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB19A3CF19228F79000327F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EB19A3D119228F79000327F0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -295,6 +298,8 @@
 				EB2A9FF3194890BC0021BBA6 /* ZKItemTableViewCell.xib */,
 				EB2A9FF61948935C0021BBA6 /* ZKCategoryTableViewController.h */,
 				EB2A9FF71948935C0021BBA6 /* ZKCategoryTableViewController.m */,
+				EB18D819194A64AF006B44DE /* ZKPayViewController.h */,
+				EB18D81A194A64AF006B44DE /* ZKPayViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -493,6 +498,7 @@
 				EB19A3DC19228F79000327F0 /* main.m in Sources */,
 				EB161F8719444C7200BD0D0A /* ZKUserViewController.m in Sources */,
 				EB19A40119229ADD000327F0 /* ZKNavigationController.m in Sources */,
+				EB18D81B194A64AF006B44DE /* ZKPayViewController.m in Sources */,
 				EB2A9FFB194893910021BBA6 /* ZKItem.m in Sources */,
 				EB161F781940FD0F00BD0D0A /* ZKSetAvatarViewController.m in Sources */,
 				EB5EC4BD1933B75E006B6516 /* ZKRegisterViewController.m in Sources */,

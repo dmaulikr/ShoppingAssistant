@@ -8,11 +8,13 @@
 
 #import "ZKAppDelegate.h"
 #import "ZKWelcomeViewController.h"
+#import "ZKPayViewController.h"
 
 @interface ZKAppDelegate () <CLLocationManagerDelegate>
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic) BOOL isInsideRegion;
 @property (nonatomic, strong) ZKWelcomeViewController *welcomeViewController;
+@property (nonatomic, strong) REFrostedViewController *frostedViewController;
 @end
 
 @implementation ZKAppDelegate
@@ -35,11 +37,11 @@
     [ZKAppDelegate SetSubViewExternNone:homeController];
     ZKNavigationController *navigationController = [[ZKNavigationController alloc] initWithRootViewController:homeController];
     ZKMenuViewController *menuController = [[ZKMenuViewController alloc] initWithStyle:UITableViewStylePlain];
-    REFrostedViewController *frostedViewController = [[REFrostedViewController alloc] initWithContentViewController:navigationController menuViewController:menuController];
-    frostedViewController.direction = REFrostedViewControllerDirectionLeft;
-    frostedViewController.liveBlurBackgroundStyle = REFrostedViewControllerLiveBackgroundStyleLight;
+    self.frostedViewController = [[REFrostedViewController alloc] initWithContentViewController:navigationController menuViewController:menuController];
+    self.frostedViewController.direction = REFrostedViewControllerDirectionLeft;
+    self.frostedViewController.liveBlurBackgroundStyle = REFrostedViewControllerLiveBackgroundStyleLight;
 
-    self.window.rootViewController = frostedViewController;
+    self.window.rootViewController = self.frostedViewController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
@@ -49,7 +51,7 @@
     if (!loginStatus || [loginStatus isEqualToString:@""]) {
         self.welcomeViewController = [[ZKWelcomeViewController alloc]init];
         [ZKAppDelegate SetSubViewExternNone:self.welcomeViewController];
-        [frostedViewController presentViewController:self.welcomeViewController animated:NO completion:^{
+        [self.frostedViewController presentViewController:self.welcomeViewController animated:NO completion:^{
             
         }];
     }
@@ -130,6 +132,8 @@
     }
     else
     {
+        self.isIn = NO;
+        self.isInPay = NO;
         [self _sendExitLocalNotification];
     }
     
@@ -142,6 +146,23 @@
     if ([beacons count] > 0) {
         CLBeacon *nearestExhibit = [beacons firstObject];
         NSLog(@"proximity:%ld        rssi:%ld", nearestExhibit.proximity, (long)nearestExhibit.rssi);
+        if (nearestExhibit.proximity == CLProximityNear) {
+            if (!self.isInPay) {
+                ZKPayViewController *payController = [[ZKPayViewController alloc] init];
+                [ZKAppDelegate SetSubViewExternNone:payController];
+                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:payController];
+                [self.frostedViewController presentViewController:nav animated:YES completion:^{
+                    
+                }];
+            }
+        }
+        if (!self.isIn) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"优惠消息" message:@"今日所有男装5折！！！" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alertView show];
+            self.isIn = YES;
+        }
+        
+        
     }
 }
 
